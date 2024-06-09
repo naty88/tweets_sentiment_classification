@@ -11,5 +11,6 @@ gen
 __pycache__/
 
 # Model-specific stuff
-model/
+bert_model/
+results/
 *.pkl
