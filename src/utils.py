@@ -1,5 +1,6 @@
 import logging
 import os
+from typing import List
 
 import numpy as np
 import pandas as pd
@@ -21,6 +22,7 @@ def read_csv(path: str, col_names=None) -> pd.DataFrame:
     """
     return pd.read_csv(path, names=col_names) if col_names else pd.read_csv(path)
 
+
 def compute_metrics(p: EvalPrediction):
     """
     Compute evaluation metrics for the model's predictions.
@@ -37,3 +39,9 @@ def compute_metrics(p: EvalPrediction):
         "recall": recall,
         "f1": f1
     }
+
+
+def get_sentiment_mapping(sent_list: List[str], is_label_to_idx=False):
+    if is_label_to_idx:
+        return {label: idx for idx, label in enumerate(sent_list)}
+    return {idx: label for idx, label in enumerate(sent_list)}
