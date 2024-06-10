@@ -1,6 +1,6 @@
 import logging
 import os
-from typing import List
+from typing import List, Dict, Union
 
 import numpy as np
 import pandas as pd
@@ -23,7 +23,7 @@ def read_csv(path: str, col_names=None) -> pd.DataFrame:
     return pd.read_csv(path, names=col_names) if col_names else pd.read_csv(path)
 
 
-def compute_metrics(p: EvalPrediction):
+def compute_metrics(p: EvalPrediction) -> Dict[str, float]:
     """
     Compute evaluation metrics for the model's predictions.
     """
@@ -41,7 +41,10 @@ def compute_metrics(p: EvalPrediction):
     }
 
 
-def get_sentiment_mapping(sent_list: List[str], is_label_to_idx=False):
+def get_sentiment_mapping(sent_list: List[str], is_label_to_idx=False)  -> Dict[Union[str, int], Union[int, str]]:
+    """
+    Generate a sentiment mapping dictionary from a list of sentiment labels.
+    """
     if is_label_to_idx:
         return {label: idx for idx, label in enumerate(sent_list)}
     return {idx: label for idx, label in enumerate(sent_list)}
